@@ -1,15 +1,16 @@
-FROM golang:1.21-alpine AS builder
+FROM golang:1.26-alpine AS builder
 
 WORKDIR /app
 
 RUN apk add --no-cache git
 
-COPY go.mod go.sum ./
-RUN go mod download
+COPY go.mod ./
+RUN GOTOOLCHAIN=auto GOPROXY=https://goproxy.cn,direct go mod download
 
 COPY . .
+RUN GOTOOLCHAIN=auto GOPROXY=https://goproxy.cn,direct go mod tidy
 
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main ./cmd/server
+RUN GOTOOLCHAIN=auto GOPROXY=https://goproxy.cn,direct CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main ./cmd/server
 
 FROM alpine:latest
 
