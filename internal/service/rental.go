@@ -71,10 +71,6 @@ func (s *RentalService) CreateOrder(ctx context.Context, renterID uint64, req *m
 		return nil, errors.New("图书已被其他人锁定,请稍后重试")
 	}
 
-	defer func() {
-		s.redis.Unlock(ctx, lockKey, orderNo)
-	}()
-
 	totalRent := *book.DailyRent * float64(req.RentDays)
 	totalAmount := *book.Deposit + totalRent
 
@@ -93,15 +89,20 @@ func (s *RentalService) CreateOrder(ctx context.Context, renterID uint64, req *m
 	}
 
 	if err := s.orderRepo.Create(ctx, order); err != nil {
+		s.redis.Unlock(ctx, lockKey, orderNo)
 		return nil, err
 	}
 
-	locked, _ = s.redis.Lock(ctx, lockKey, fmt.Sprintf("%d", order.ID), s.platform.PayTimeout)
-	if !locked {
+	newLockKey := fmt.Sprintf("lock:rental:pay:%d", order.ID)
+	newLockValue := fmt.Sprintf("%d", order.ID)
+	payLocked, _ := s.redis.Lock(ctx, newLockKey, newLockValue, s.platform.PayTimeout)
+	if !payLocked {
 		_ = s.orderRepo.UpdateStatus(ctx, order.ID, model.RentalStatusCancelled)
+		s.redis.Unlock(ctx, lockKey, orderNo)
 		return nil, errors.New("锁定失败")
 	}
 
+	s.redis.Unlock(ctx, lockKey, orderNo)
 	return order, nil
 }
 

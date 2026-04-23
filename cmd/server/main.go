@@ -60,5 +60,21 @@ func main() {
 		log.Fatalf("Server forced to shutdown: %v", err)
 	}
 
+	if db != nil {
+		sqlDB, _ := db.DB()
+		if sqlDB != nil {
+			sqlDB.Close()
+			log.Println("Database connection closed")
+		}
+	}
+
+	if redisClient != nil {
+		if err := redisClient.Close(); err != nil {
+			log.Printf("Redis connection close error: %v", err)
+		} else {
+			log.Println("Redis connection closed")
+		}
+	}
+
 	log.Println("Server exited")
 }
