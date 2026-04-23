@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bookshare-api
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      - SERVER_PORT=8080
+      - SERVER_MODE=release
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT:-3306}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME:-bookshare}
+      - DB_MAX_OPEN_CONNS=100
+      - DB_MAX_IDLE_CONNS=10
+      - DB_CONN_LIFETIME=1h
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT:-6379}
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-}
+      - REDIS_DB=${REDIS_DB:-0}
+      - REDIS_POOL_SIZE=100
+      - REDIS_MIN_IDLE_CONNS=10
+      - JWT_SECRET=${JWT_SECRET:-bookshare-jwt-secret-key-2024}
+      - JWT_EXPIRE_TIME=168h
+      - JWT_ISSUER=bookshare
+      - PLATFORM_FEE_RATE=${PLATFORM_FEE_RATE:-0.05}
+      - PLATFORM_MAX_AGE=${PLATFORM_MAX_AGE:-30}
+      - PLATFORM_PAY_TIMEOUT=15m
+      - PLATFORM_AUTO_SETTLE_DAY=${PLATFORM_AUTO_SETTLE_DAY:-7}
+    networks:
+      - bookshare-network
+
+networks:
+  bookshare-network:
+    driver: bridge

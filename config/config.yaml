@@ -1,0 +1,38 @@
+server:
+  port: 8080
+  read_timeout: 10s
+  write_timeout: 10s
+  mode: release
+
+database:
+  host: ${DB_HOST}
+  port: ${DB_PORT:3306}
+  user: ${DB_USER}
+  password: ${DB_PASSWORD}
+  dbname: ${DB_NAME:bookshare}
+  max_open_conns: ${DB_MAX_OPEN_CONNS:100}
+  max_idle_conns: ${DB_MAX_IDLE_CONNS:10}
+  conn_lifetime: 1h
+
+redis:
+  host: ${REDIS_HOST}
+  port: ${REDIS_PORT:6379}
+  password: ${REDIS_PASSWORD:}
+  db: ${REDIS_DB:0}
+  pool_size: ${REDIS_POOL_SIZE:100}
+  min_idle_conns: ${REDIS_MIN_IDLE_CONNS:10}
+  max_retries: 3
+  dial_timeout: 10s
+  read_timeout: 5s
+  write_timeout: 5s
+
+jwt:
+  secret: ${JWT_SECRET:bookshare-jwt-secret-key-2024}
+  expire_time: 168h
+  issuer: bookshare
+
+platform:
+  fee_rate: ${PLATFORM_FEE_RATE:0.05}
+  max_age: ${PLATFORM_MAX_AGE:30}
+  pay_timeout: 15m
+  auto_settle_day: ${PLATFORM_AUTO_SETTLE_DAY:7}
