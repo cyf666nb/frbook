@@ -45,7 +45,7 @@ function Logo() {
 function Navbar() {
   return (
     <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100">
-      <div className="max-w-6xl mx-auto px-8 py-4 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-4 md:px-8 py-4 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-3">
           <Logo />
           <span className="font-serif text-xl text-[#1A1A1A]">高校图书流转</span>
@@ -170,7 +170,7 @@ export default function Guide() {
     <div className="min-h-screen bg-[#FAFAFA]">
       <Navbar />
 
-      <div className="max-w-6xl mx-auto px-8 py-8">
+      <div className="max-w-6xl mx-auto px-4 md:px-8 py-8">
         <BackButton />
 
         <div className="mt-8 mb-12">
@@ -225,7 +225,7 @@ export default function Guide() {
         )}
       </div>
 
-      <footer className="py-12 px-8 border-t border-[#F0F0F0] bg-white mt-12">
+      <footer className="py-8 md:py-12 px-4 md:px-8 border-t border-[#F0F0F0] bg-white mt-12">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Logo />

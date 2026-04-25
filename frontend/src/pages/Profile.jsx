@@ -71,19 +71,19 @@ export default function Profile() {
         </div>
       </header>
 
-      <main className="max-w-4xl mx-auto px-6 py-12">
-        <div className="bg-white rounded-2xl shadow-card p-8 mb-8">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="font-serif text-2xl text-primary">基本信息</h2>
+      <main className="max-w-4xl mx-auto px-4 md:px-6 py-8 md:py-12">
+        <div className="bg-white rounded-2xl shadow-card p-6 md:p-8 mb-6 md:mb-8">
+          <div className="flex items-center justify-between mb-4 md:mb-6">
+            <h2 className="font-serif text-xl md:text-2xl text-primary">基本信息</h2>
             <button
               onClick={() => editing ? handleSave() : setEditing(true)}
-              className="px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors"
+              className="px-4 py-2 bg-primary text-white rounded-lg text-xs md:text-sm font-medium hover:bg-gray-800 transition-colors"
             >
               {editing ? '保存' : '编辑'}
             </button>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             <div>
               <label className="block text-sm font-medium text-secondary mb-2">账号</label>
               <p className="text-primary">{user.account}</p>
@@ -164,19 +164,19 @@ export default function Profile() {
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-card p-8">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="font-serif text-2xl text-primary">我发布的图书</h2>
+        <div className="bg-white rounded-2xl shadow-card p-6 md:p-8">
+          <div className="flex items-center justify-between mb-4 md:mb-6">
+            <h2 className="font-serif text-xl md:text-2xl text-primary">我发布的图书</h2>
             <Link
               to="/publish"
-              className="px-4 py-2 bg-accent-blue text-white rounded-lg text-sm font-medium hover:bg-blue-600 transition-colors"
+              className="px-4 py-2 bg-accent-blue text-white rounded-lg text-xs md:text-sm font-medium hover:bg-blue-600 transition-colors"
             >
               发布新书
             </Link>
           </div>
 
           {loading ? (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
               {[...Array(4)].map((_, i) => (
                 <div key={i} className="bg-gray-100 rounded-xl animate-pulse h-48" />
               ))}

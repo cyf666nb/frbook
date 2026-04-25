@@ -118,14 +118,14 @@ export default function BookDetail() {
         </div>
       </header>
 
-      <main className="max-w-4xl mx-auto px-6 py-12">
-        <div className="grid md:grid-cols-2 gap-12">
+      <main className="max-w-4xl mx-auto px-4 md:px-6 py-8 md:py-12">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12">
           <div className="aspect-[3/4] bg-gray-100 rounded-2xl overflow-hidden shadow-card">
             {book.cover_image ? (
               <img src={book.cover_image} alt={book.title} className="w-full h-full object-cover" />
             ) : (
               <div className="w-full h-full flex items-center justify-center text-gray-300">
-                <svg className="w-24 h-24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-20 md:w-24 h-20 md:h-24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                 </svg>
               </div>
@@ -133,15 +133,15 @@ export default function BookDetail() {
           </div>
 
           <div>
-            <span 
+            <span
               className="inline-block px-3 py-1 rounded-full text-sm text-white mb-4"
               style={{ backgroundColor: mode.color }}
             >
               {mode.name}
             </span>
 
-            <h1 className="font-serif text-3xl text-primary mb-2">{book.title}</h1>
-            <p className="text-secondary mb-6">{book.author || '未知作者'}</p>
+            <h1 className="font-serif text-2xl md:text-3xl text-primary mb-2">{book.title}</h1>
+            <p className="text-secondary mb-6 text-sm md:text-base">{book.author || '未知作者'}</p>
 
             {book.daily_rent && (
               <div className="mb-4">
@@ -202,7 +202,7 @@ export default function BookDetail() {
             {book.images?.length > 0 && (
               <div className="mb-8">
                 <h3 className="text-sm font-medium text-primary mb-3">实物图片</h3>
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3">
                   {book.images.map((img, i) => (
                     <div key={i} className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
                       <img src={img} alt="" className="w-full h-full object-cover" />
@@ -213,17 +213,17 @@ export default function BookDetail() {
             )}
 
             {!isOwner && (
-              <div className="space-y-4">
+              <div className="space-y-3 md:space-y-4">
                 {book.mode === 1 && (
                   <>
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-3 flex-wrap">
                       <label className="text-sm text-secondary">租赁天数:</label>
                       <input
                         type="number"
                         min={book.min_rent_days || 1}
                         value={rentDays}
                         onChange={(e) => setRentDays(Number(e.target.value))}
-                        className="w-24 px-3 py-2 border border-gray-200 rounded-lg text-center"
+                        className="w-20 px-3 py-2 border border-gray-200 rounded-lg text-center text-sm"
                       />
                       <span className="text-sm text-secondary">
                         预计: ¥{(book.daily_rent * rentDays + book.deposit).toFixed(2)}

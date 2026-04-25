@@ -105,7 +105,7 @@ export default function Orders() {
         </div>
       </header>
 
-      <main className="max-w-4xl mx-auto px-6 py-8">
+      <main className="max-w-4xl mx-auto px-4 md:px-6 py-8 md:py-12">
         <div className="bg-white rounded-2xl shadow-card overflow-hidden">
           <div className="flex border-b border-gray-100">
             {tabs.map(tab => (

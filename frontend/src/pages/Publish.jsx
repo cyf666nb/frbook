@@ -128,13 +128,13 @@ export default function Publish() {
         </div>
       </header>
 
-      <main className="max-w-2xl mx-auto px-6 py-12">
+      <main className="max-w-2xl mx-auto px-4 md:px-6 py-8 md:py-12">
         <h1 className="font-serif text-3xl text-[#1A1A1A] mb-8">发布图书</h1>
 
         <form onSubmit={handleSubmit} className="space-y-8">
-          <div className="bg-white rounded-2xl p-6 shadow-sm">
+          <div className="bg-white rounded-2xl p-4 md:p-6 shadow-sm">
             <label className="block text-sm font-medium text-[#1A1A1A] mb-3">流转方式</label>
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {modeOptions.map(option => (
                 <button
                   key={option.value}
@@ -159,8 +159,8 @@ export default function Publish() {
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl p-6 shadow-sm space-y-6">
-            <div className="grid md:grid-cols-2 gap-6">
+          <div className="bg-white rounded-2xl p-4 md:p-6 shadow-sm space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
               <div>
                 <label className="block text-sm font-medium text-[#1A1A1A] mb-2">ISBN（可扫码）</label>
                 <div className="flex gap-2">
@@ -193,7 +193,7 @@ export default function Publish() {
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
               <div>
                 <label className="block text-sm font-medium text-[#1A1A1A] mb-2">作者</label>
                 <input
@@ -242,9 +242,9 @@ export default function Publish() {
           </div>
 
           {form.mode === 1 && (
-            <div className="bg-white rounded-2xl p-6 shadow-sm">
+            <div className="bg-white rounded-2xl p-4 md:p-6 shadow-sm">
               <label className="block text-sm font-medium text-[#1A1A1A] mb-3">租赁设置</label>
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-3 gap-3 md:gap-4">
                 <div>
                   <label className="block text-xs text-[#666] mb-2">日租金(元) *</label>
                   <input
@@ -327,9 +327,9 @@ export default function Publish() {
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl p-6 shadow-sm">
+          <div className="bg-white rounded-2xl p-4 md:p-6 shadow-sm">
             <label className="block text-sm font-medium text-[#1A1A1A] mb-3">实物图片</label>
-            
+
             <input
               ref={fileInputRef}
               type="file"
@@ -340,7 +340,7 @@ export default function Publish() {
               className="hidden"
             />
 
-            <div className="grid grid-cols-4 gap-3 mb-4">
+            <div className="grid grid-cols-3 md:grid-cols-4 gap-2 md:gap-3 mb-4">
               {form.images.map((img, index) => (
                 <div key={index} className="relative aspect-square rounded-xl overflow-hidden bg-gray-100">
                   <img src={img} alt="" className="w-full h-full object-cover" />
