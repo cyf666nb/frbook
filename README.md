@@ -2,6 +2,8 @@
 
 一个面向大学生的二手书籍共享/租赁平台，使用 React + localStorage 实现，纯前端版本，无需后端。
 
+> 💡 完整版本（包含后端）演示网站：[code.fycyf.xyz](http://code.fycyf.xyz)
+>
 > 💡 如需完整版本（包含后端），请访问：[frbook 完整版](https://github.com/cyf666nb/frbook/tree/main)
 
 ## 功能特点
