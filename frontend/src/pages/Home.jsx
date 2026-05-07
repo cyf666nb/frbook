@@ -215,7 +215,7 @@ function HeroSection() {
 
   const cardOffsets = [-384, -264, -144, -24, 96]
 
-  // Cache last stable transforms — only recompute when not animating
+  // Cache stable transforms — recompute when not animating
   const cardTransformsRef = useRef([])
   if (!isAnimating) {
     cardTransformsRef.current = cardOffsets.map((offset, index) => {
@@ -235,10 +235,10 @@ function HeroSection() {
 
   const handleCardClick = (index) => {
     if (isAnimating) return
+    setIsAnimating(true)
     if (expandedIndex === index) {
       setExpandedIndex(null)
     } else {
-      setIsAnimating(true)
       setExpandedIndex(index)
     }
   }
@@ -254,10 +254,11 @@ function HeroSection() {
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
 
-  // Reset isAnimating after transition completes (500ms expand / 450ms collapse)
+  // Reset isAnimating after transition completes
   useEffect(() => {
     if (isAnimating) {
-      const timer = setTimeout(() => setIsAnimating(false), 500)
+      const duration = expandedIndex === null ? 250 : 500
+      const timer = setTimeout(() => setIsAnimating(false), duration)
       return () => clearTimeout(timer)
     }
   }, [isAnimating])
@@ -312,7 +313,7 @@ function HeroSection() {
                   zIndex: isExpanded ? 50 : 5 - Math.abs(index - 2),
                   transition: isExpanded
                     ? 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)'
-                    : 'all 0.45s cubic-bezier(0.4, 0, 0.2, 1)',
+                    : 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
                   transform: getCardTransform(index),
                 }}
               >
